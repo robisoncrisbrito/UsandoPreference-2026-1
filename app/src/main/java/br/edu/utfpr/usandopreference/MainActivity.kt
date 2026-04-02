@@ -1,5 +1,6 @@
 package br.edu.utfpr.usandopreference
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
@@ -13,6 +14,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     var ligado = false
 
+    private lateinit var sharedPreference: SharedPreferences
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,7 +28,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         image = findViewById(R.id.image)
-    }
+
+        sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+
+        ligado = sharedPreference.getBoolean( "ligado", false )
+
+        when (ligado) {
+            true -> image.setImageResource(android.R.drawable.star_big_on )
+            false -> image.setImageResource(android.R.drawable.star_big_off )
+        }
+
+    } //fim do onCreate()
 
     fun btOnOffOnClick(view: View) {
         when (ligado) {
@@ -38,5 +52,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    }
-}
+        val editor = sharedPreference.edit()
+        editor.putBoolean( "ligado", ligado )
+        editor.commit()
+
+    }//fim do btOnOffOnClick()
+} //fim da MainActivity
