@@ -1,5 +1,6 @@
 package br.edu.utfpr.usandopreference
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
@@ -8,8 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.preference.PreferenceManager
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() { //fim da MainActivity
 
     private lateinit var image: ImageView
     var ligado = false
@@ -57,4 +59,14 @@ class MainActivity : AppCompatActivity() {
         editor.commit()
 
     }//fim do btOnOffOnClick()
-} //fim da MainActivity
+
+    fun btConfiguracaoOnClick(view: View) {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+
+        //para recuperar o valor da tela de configuracao
+        val assinatura = PreferenceManager.getDefaultSharedPreferences(this).getString( "signature", "" )
+
+
+    }
+}

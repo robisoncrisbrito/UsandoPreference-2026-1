@@ -22,4 +22,11 @@
         android:layout_gravity="center"
         android:onClick="btOnOffOnClick"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Configuração"
+        android:layout_gravity="center"
+        android:onClick="btConfiguracaoOnClick"/>
+
 </LinearLayout>
